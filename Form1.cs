@@ -12,33 +12,57 @@ namespace Ahorcado3
 {
     public partial class Form1 : Form
     {
-        String palabraOculta = "CETYS";
+        //aquí almacenamos la palabra aleatoria que vamos a tener que adivinar
+        String palabraOculta = eligePalabra();
+        //almacenamos el número de fallos que vamos teniendo
         int numeroFallos = 0;
         public Form1()
         {
             InitializeComponent();
+            String _palabraConGuiones = "";
+            for (int i=0; i < palabraOculta.Length; i++)
+            {
+                if (palabraOculta[i] != ' ')
+                {
+                    _palabraConGuiones += "_ ";
+                }
+                else
+                {
+                    _palabraConGuiones += " ";
+                }
+                label1.Text = _palabraConGuiones;
+            }
         }
 
+        private static String eligePalabra()
+        {
+            String[] listaPlabras = {"Cetys", "sol", "DAM", "donuts"};
+            Random aleatorio = new Random();
+            int posicion = aleatorio.Next(listaPlabras.Length);
+            return listaPlabras[posicion].ToUpper();
+        }
 
         private void botonPulsado(object sender, EventArgs e)
         {
             Button miBoton = (Button)sender;
             String letra = miBoton.Text;
             letra = letra.ToUpper();
-            Boolean finPartida = false;
-            if (!finPartida)
-            {
-
-            }
+            //comprobamos si la letra está en la palabraOculta
             if (palabraOculta.Contains(letra))
             {
-                int posicion = palabraOculta.IndexOf(letra);
-                label1.Text = label1.Text.Remove(2 * posicion, 1).Insert(2 * posicion, letra);
+                for (int i = 0; i < palabraOculta.Length; i++)
+                {
+                    if (palabraOculta[i] == letra[0])
+                    {
+                        label1.Text = label1.Text.Remove(2*i, 1 ).Insert(2*i, letra);
+                    }
+                }
             }
             else
             {
                 numeroFallos++;
             }
+            
 
             switch (numeroFallos)
             {

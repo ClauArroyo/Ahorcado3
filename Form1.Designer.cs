@@ -67,7 +67,6 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(257, 57);
             this.label1.TabIndex = 0;
-            this.label1.Text = "_ _ _ _ _";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.botonPulsado);
             // 
@@ -383,7 +382,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 450);
+            this.ClientSize = new System.Drawing.Size(281, 504);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button23);
