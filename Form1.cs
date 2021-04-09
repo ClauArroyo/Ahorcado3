@@ -12,14 +12,16 @@ namespace Ahorcado3
 {
     public partial class Form1 : Form
     {
-        //aquí almacenamos la palabra aleatoria que vamos a tener que adivinar
+        //Almacenamos la palabra aleatoria que vamos a tener que adivinar
         String palabraOculta = eligePalabra();
-        //almacenamos el número de fallos que vamos teniendo
+        //Amacenamos el número de fallos que vamos teniendo
         int numeroFallos = 0;
         public Form1()
         {
             InitializeComponent();
+            //creamos un string que almacenará los guiones de la palabra aleatoria
             String _palabraConGuiones = "";
+            //una vez tengamos la palabra aleatoria con este bucle for iremos poniendo tantos guiones como letras tenga la palabra aleatoria
             for (int i=0; i < palabraOculta.Length; i++)
             {
                 if (palabraOculta[i] != ' ')
@@ -36,9 +38,11 @@ namespace Ahorcado3
 
         private static String eligePalabra()
         {
+            //creamos un array con las distintas palabras para posteriormente elegir una aleatoriamente
             String[] listaPlabras = {"Cetys", "sol", "DAM", "donuts"};
             Random aleatorio = new Random();
             int posicion = aleatorio.Next(listaPlabras.Length);
+            //ponemos todas las letras en mayúscula para así evitar posibles errores
             return listaPlabras[posicion].ToUpper();
         }
 
@@ -47,7 +51,7 @@ namespace Ahorcado3
             Button miBoton = (Button)sender;
             String letra = miBoton.Text;
             letra = letra.ToUpper();
-            //comprobamos si la letra está en la palabraOculta
+            //comprobamos si la letra está en la palabra oculta y si está cambiamos el guión por la letra o letras adivinadas
             if (palabraOculta.Contains(letra))
             {
                 for (int i = 0; i < palabraOculta.Length; i++)
@@ -58,6 +62,7 @@ namespace Ahorcado3
                     }
                 }
             }
+            //en el caso de que la letra no se encuentre en la palabra oculta aumentará el contador del número de fallos
             else
             {
                 numeroFallos++;
