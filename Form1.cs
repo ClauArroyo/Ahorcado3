@@ -50,6 +50,7 @@ namespace Ahorcado3
 
         private void botonPulsado(object sender, EventArgs e)
         {
+            //con este método hacemos que los botones funcionen siempre y cuando no haya terminado la partida
             if (!finPartida)
             {
                 Button miBoton = (Button)sender;
@@ -71,6 +72,7 @@ namespace Ahorcado3
                         label1.Text = label1.Text.Remove(2 * i, 1).Insert(2 * i, letra);
                     }
                 }
+                //si en pantalla no quedarán guiones significa que ha terminado la partida
                 if (!label1.Text.Contains('_'))
                 {
                     finPartida = true;
@@ -80,6 +82,7 @@ namespace Ahorcado3
             else
             {
                 numeroFallos++;
+                //también en el caso de que haya 6 o más errores significará que ha terminado la partida
                 if (numeroFallos >= 6)
                 {
                     finPartida = true;
@@ -99,12 +102,13 @@ namespace Ahorcado3
                 case 5: pictureBox1.Image = Properties.Resources.ahorcado_5; break;
                 default: pictureBox1.Image = Properties.Resources.ahorcado_fin; break;
             }
-
-            if (!label1.Text.Contains('_') && !finPartida)
+            //Si en pantalla no hay más guiones siginficará que hemos acertado la palabra y saldrá la imagen correspondiente. Es el fin de la partida
+            if (!label1.Text.Contains('_'))
             {
                 pictureBox1.Image = Properties.Resources.acertasteTodo;
             }
-            if (finPartida)
+            //Si hemos tenido más de 6 fallos significará que no hemos acertado la palbra y saldrá la imagen correspondiente. Es el fin de la partida
+            if (numeroFallos >= 6)
             {
                 pictureBox1.Image = Properties.Resources.gameOver;
             }
