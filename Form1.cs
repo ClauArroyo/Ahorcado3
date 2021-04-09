@@ -16,6 +16,8 @@ namespace Ahorcado3
         String palabraOculta = eligePalabra();
         //Amacenamos el número de fallos que vamos teniendo
         int numeroFallos = 0;
+        //Nos indica si la partida ha terminado o no
+        bool finPartida = false;
         public Form1()
         {
             InitializeComponent();
@@ -48,9 +50,17 @@ namespace Ahorcado3
 
         private void botonPulsado(object sender, EventArgs e)
         {
-            Button miBoton = (Button)sender;
-            String letra = miBoton.Text;
-            letra = letra.ToUpper();
+            if (!finPartida)
+            {
+                Button miBoton = (Button)sender;
+                miBoton.Enabled = false;
+                String letra = miBoton.Text;
+                letra = letra.ToUpper();
+                chequeaLetra(letra);
+            }
+        }
+        private void chequeaLetra (String letra)
+        {
             //comprobamos si la letra está en la palabra oculta y si está cambiamos el guión por la letra o letras adivinadas
             if (palabraOculta.Contains(letra))
             {
@@ -58,15 +68,25 @@ namespace Ahorcado3
                 {
                     if (palabraOculta[i] == letra[0])
                     {
-                        label1.Text = label1.Text.Remove(2*i, 1 ).Insert(2*i, letra);
+                        label1.Text = label1.Text.Remove(2 * i, 1).Insert(2 * i, letra);
                     }
+                }
+                if (!label1.Text.Contains('_'))
+                {
+                    finPartida = true;
                 }
             }
             //en el caso de que la letra no se encuentre en la palabra oculta aumentará el contador del número de fallos
             else
             {
                 numeroFallos++;
+                if (numeroFallos >= 6)
+                {
+                    finPartida = true;
+                    label1.Text = "";
+                }
             }
+        
             
 
             switch (numeroFallos)
@@ -80,9 +100,13 @@ namespace Ahorcado3
                 default: pictureBox1.Image = Properties.Resources.ahorcado_fin; break;
             }
 
-            if (!label1.Text.Contains('_'))
+            if (!label1.Text.Contains('_') && !finPartida)
             {
                 pictureBox1.Image = Properties.Resources.acertasteTodo;
+            }
+            if (finPartida)
+            {
+                pictureBox1.Image = Properties.Resources.gameOver;
             }
         }
     }

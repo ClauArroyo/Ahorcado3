@@ -104,5 +104,8 @@
   <ItemGroup>
     <None Include="Resources\ahorcado_fin.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gameOver.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
